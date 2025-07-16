@@ -42,7 +42,7 @@ export function TokenSelector({ selectedToken, onTokenSelect, label }: TokenSele
       <Button
         variant="outline"
         onClick={() => setIsOpen(true)}
-        className="flex items-center space-x-2 bg-muted/50 hover:bg-muted/70 px-3 py-2"
+        className="flex items-center space-x-2 px-3 py-2 bg-muted hover:bg-muted/90 transition-colors"
       >
         <div className="w-6 h-6 rounded-full bg-blue-500" />
         <span className="font-medium">
@@ -52,9 +52,12 @@ export function TokenSelector({ selectedToken, onTokenSelect, label }: TokenSele
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px]" aria-describedby="token-selector-description">
           <DialogHeader>
             <DialogTitle>Select {label} Token</DialogTitle>
+            <div id="token-selector-description" className="sr-only">
+              Choose a token from the list or search by name, symbol, or address
+            </div>
           </DialogHeader>
           
           <div className="space-y-4">

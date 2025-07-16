@@ -6,6 +6,7 @@ import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { ArrowUpDown, Settings } from 'lucide-react';
 import { TokenSelector } from './token-selector';
+import { LimitOrderInterface } from './limit-order-interface';
 import { useWallet } from '../../hooks/use-wallet';
 import { useQuote, useSwapTransaction } from '../../hooks/use-1inch';
 import { useToast } from '../../hooks/use-toast';
@@ -18,6 +19,7 @@ export function SwapInterface() {
   const [fromAmount, setFromAmount] = useState('');
   const [slippage, setSlippage] = useState(1.0);
   const [showSettings, setShowSettings] = useState(false);
+  const [activeTab, setActiveTab] = useState<'swap' | 'limit' | 'dca'>('swap');
   
   const { account, chainId, sendTransaction } = useWallet();
   const { toast } = useToast();
@@ -78,17 +80,20 @@ export function SwapInterface() {
     <Card className="trading-card">
       <CardContent className="space-y-6">
         <div className="flex items-center justify-between">
-          <div className="flex space-x-4">
+          <div className="flex space-x-1">
             <Button 
-              variant="default" 
-              className="bg-secondary-500 hover:bg-secondary-600"
+              variant={activeTab === 'swap' ? 'default' : 'ghost'}
+              className={activeTab === 'swap' ? 'bg-secondary-500 hover:bg-secondary-600' : 'text-muted-foreground hover:text-foreground'}
+              onClick={() => setActiveTab('swap')}
             >
               Swap
             </Button>
-            <Button variant="ghost" className="text-muted-foreground">
-              Limit
-            </Button>
-            <Button variant="ghost" className="text-muted-foreground">
+            <LimitOrderInterface fromToken={fromToken} toToken={toToken} />
+            <Button 
+              variant="ghost" 
+              className="text-muted-foreground hover:text-foreground"
+              onClick={() => setActiveTab('dca')}
+            >
               DCA
             </Button>
           </div>

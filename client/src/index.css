@@ -92,11 +92,8 @@
   }
 
   .glass-card {
-    backdrop-filter: blur(16px);
-    background-color: hsl(var(--card));
-    opacity: 0.9;
-    border: 1px solid hsl(var(--border));
-    border-opacity: 0.5;
+    @apply backdrop-blur-lg bg-card border border-border;
+    opacity: 0.95;
   }
 
   .trading-card {
@@ -104,12 +101,8 @@
   }
 
   .token-input {
-    background-color: hsl(var(--muted));
-    opacity: 0.4;
-    border-radius: 0.75rem;
-    padding: 1rem;
-    border: 1px solid hsl(var(--border));
-    border-opacity: 0.5;
+    @apply bg-muted rounded-xl p-4 border border-border;
+    opacity: 0.8;
   }
 
   .gradient-text {
@@ -151,14 +144,7 @@
 
 /* Trading interface specific styles */
 .swap-direction-btn {
-  @apply w-12 h-12 border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110;
-  background-color: hsl(var(--muted));
-  opacity: 0.5;
-}
-
-.swap-direction-btn:hover {
-  background-color: hsl(var(--muted));
-  opacity: 0.7;
+  @apply w-12 h-12 bg-muted hover:bg-muted border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110;
 }
 
 .token-balance {
