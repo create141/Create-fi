@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+
+  /* CREATEFI Custom Colors */
+  --primary-50: hsl(217, 100%, 97%);
+  --primary-500: hsl(225, 67%, 49%);
+  --primary-600: hsl(232, 77%, 20%);
+  --primary-900: hsl(240, 57%, 9%);
+  --secondary-500: hsl(164, 100%, 42%);
+  --secondary-600: hsl(249, 69%, 59%);
+  --gradient-from: hsl(164, 100%, 42%);
+  --gradient-to: hsl(249, 69%, 59%);
+}
+
+.dark {
+  --background: hsl(240, 57%, 9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(232, 77%, 20%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 57%, 9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(232, 77%, 20%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(225, 67%, 49%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(232, 77%, 20%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(232, 77%, 20%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-accent rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
+    opacity: 0.8;
+  }
+}
+
+@layer components {
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--gradient-from), var(--gradient-to));
+  }
+
+  .glass-card {
+    backdrop-filter: blur(16px);
+    background-color: hsl(var(--card));
+    opacity: 0.9;
+    border: 1px solid hsl(var(--border));
+    border-opacity: 0.5;
+  }
+
+  .trading-card {
+    @apply glass-card rounded-2xl p-6;
+  }
+
+  .token-input {
+    background-color: hsl(var(--muted));
+    opacity: 0.4;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    border: 1px solid hsl(var(--border));
+    border-opacity: 0.5;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--gradient-from), var(--gradient-to));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+}
+
+/* Custom animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Trading interface specific styles */
+.swap-direction-btn {
+  @apply w-12 h-12 border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110;
+  background-color: hsl(var(--muted));
+  opacity: 0.5;
+}
+
+.swap-direction-btn:hover {
+  background-color: hsl(var(--muted));
+  opacity: 0.7;
+}
+
+.token-balance {
+  @apply text-sm text-muted-foreground;
+}
+
+.price-change-positive {
+  @apply text-green-400;
+}
+
+.price-change-negative {
+  @apply text-red-400;
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 768px) {
+  .trading-card {
+    @apply p-4;
+  }
+  
+  .token-input {
+    @apply p-3;
+  }
+}
